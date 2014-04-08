@@ -5,7 +5,7 @@ commit:
 push:
 	git push -u origin master
 
-push-and-commit:
-	make M=$M commit
+commit-and-push:
+	make M="$M" commit
 	make push
 
