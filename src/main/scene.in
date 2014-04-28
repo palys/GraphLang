@@ -1,0 +1,20 @@
+def prostakat
+{
+    default_color(0.5, 1.0, 0.0);
+    rectangle(0, 0, 200, 100);
+}
+
+def dwa_prostakaty
+{
+    default_color(1.0, 1.0, 1.0);
+    prostakat;
+    /*color(1.0, 0.5, 0.5);*/
+    rotate(90.0);
+    prostakat;
+}
+
+scene(800, 600)
+{
+    dwa_prostakaty;
+    translate(200, -200);
+}

@@ -3,9 +3,9 @@ Created on 8 Apr 2014
 
 @author: tpalys
 '''
-from scene.shape2d.nodes.add.AddNode import AddNode
+from src.scene.shape2d.nodes.add.AddNode import AddNode
 
-class OrNode(object, AddNode):
+class OrNode(AddNode):
     '''
     classdocs
     '''
@@ -15,3 +15,6 @@ class OrNode(object, AddNode):
         '''
         Constructor
         '''
+
+    def __str__(self):
+        return "Or \n{0}".format(str(self.primitive))

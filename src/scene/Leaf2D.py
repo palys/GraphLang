@@ -3,15 +3,15 @@ Created on 8 Apr 2014
 
 @author: tpalys
 '''
-from scene import Component2D
+from src.scene.Component2D import Component2D
 
-class Leaf2D(object, Component2D):
+class Leaf2D(Component2D):
     '''
     classdocs
     '''
 
 
-    def __init__(self, params):
+    def __init__(self):
         '''
         Constructor
         '''

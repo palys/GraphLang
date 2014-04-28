@@ -3,7 +3,7 @@ Created on 8 Apr 2014
 
 @author: tpalys
 '''
-from scene.shape2d.primitives.Primitive import Primitive
+from src.scene.shape2d.primitives.Primitive import Primitive
 
 class Circle(object, Primitive):
     '''
@@ -18,3 +18,6 @@ class Circle(object, Primitive):
         self.centerX = centerX
         self.centerY = centerY
         self.radius = radius
+
+    def __str__(self):
+        return "Circle {0} {1} {2}".format(self.centerX, self.centerY, self.radius)

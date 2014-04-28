@@ -3,15 +3,15 @@ Created on 8 Apr 2014
 
 @author: tpalys
 '''
-from scene.Component2D import Component2D
+from src.scene.Component2D import Component2D
 
-class Composite2D(object, Component2D):
+class Composite2D(Component2D):
     '''
     classdocs
     '''
+    children = []
 
-
-    def __init__(self, params):
+    def __init__(self):
         '''
         Constructor
         '''
@@ -25,3 +25,11 @@ class Composite2D(object, Component2D):
 
     def getChildren(self):
         return self.children
+
+    def __str__(self):
+        s = ""
+        print "$"
+        for x in self.children:
+            print "!"
+            s.join("\n").join(str(x))
+        return s

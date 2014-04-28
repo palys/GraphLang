@@ -3,9 +3,9 @@ Created on 8 Apr 2014
 
 @author: tpalys
 '''
-from scene.Leaf2D import Leaf2D
+from src.scene.Leaf2D import Leaf2D
 
-class Primitive(object, Leaf2D):
+class Primitive(Leaf2D):
     '''
     classdocs
     '''
