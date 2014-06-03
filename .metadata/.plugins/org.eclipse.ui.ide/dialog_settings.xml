@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="installedFeatures">
+		<item value="AnyEditTools:2.4.4.201403181446"/>
+		<item value="com.google.eclipse.mechanic:0.3.4"/>
+		<item value="org.eclipse.egit:3.3.0.201403021825-r"/>
+		<item value="org.eclipse.emf.common:2.9.2.v20131212-0545"/>
+		<item value="org.eclipse.emf.ecore:2.9.2.v20131212-0545"/>
+		<item value="org.eclipse.help:2.0.2.v20140221-1700"/>
+		<item value="org.eclipse.jgit:3.3.0.201403021825-r"/>
+		<item value="org.eclipse.platform:4.3.2.v20140221-1852"/>
+		<item value="org.eclipse.rcp:4.3.2.v20140221-1700"/>
+		<item value="org.python.pydev.feature:3.4.1.201403181446"/>
+	</list>
+	<section name="NewWizardAction">
+	</section>
+</section>

@@ -5,9 +5,9 @@ _tabversion = '3.2'
 
 _lr_method = 'LALR'
 
-_lr_signature = '\x82\xf1\xd6\xc0\x1f\xd3\xb3\xb4^\xee\x84\x8fA\xffZ\x00'
+_lr_signature = '6I\x12\xf6E\xc25K\xef \xed\xf1gq\x1a5'
     
-_lr_action_items = {'ROTATE':([29,44,],[33,33,]),')':([15,48,52,57,61,],[19,53,56,59,62,]),'(':([4,13,23,33,37,],[7,17,30,42,45,]),'FLOAT':([17,31,42,47,],[27,40,48,52,]),'SCENE':([0,2,5,18,],[-3,4,-2,-4,]),'DEFAULT_COLOR':([10,],[13,]),',':([9,27,39,40,50,51,58,],[11,31,46,47,54,55,60,]),'RECTANGLE':([16,28,34,44,49,],[23,23,23,-11,-10,]),';':([12,20,22,24,25,26,35,36,38,53,56,59,62,],[16,-16,29,-17,-20,-18,-13,44,-12,-14,-6,-15,-19,]),'INTEGER':([7,11,30,45,46,54,55,60,],[9,15,39,50,51,57,58,61,]),'{':([8,19,],[10,28,]),'TRANSLATE':([29,44,],[37,37,]),'}':([14,21,29,32,34,43,44,49,],[18,-5,-9,41,-8,-7,-11,-10,]),'ID':([6,16,28,34,44,49,],[8,25,25,25,-11,-10,]),'DEF':([0,2,5,18,],[-3,6,-2,-4,]),'$end':([1,3,41,],[0,-1,-21,]),}
+_lr_action_items = {'ROTATE':([32,47,],[37,37,]),')':([15,51,55,60,64,],[19,56,59,62,65,]),'(':([4,13,25,37,41,],[7,17,34,46,48,]),'FLOAT':([17,35,46,50,],[29,44,51,55,]),'SCENE':([0,2,5,18,],[-3,4,-2,-4,]),'DEFAULT_COLOR':([10,],[13,]),',':([9,29,43,44,53,54,61,],[11,35,49,50,57,58,63,]),'RECTANGLE':([16,21,24,30,32,38,47,52,],[25,25,25,25,-12,-11,-14,-13,]),';':([12,20,23,26,27,28,39,40,42,56,59,62,65,],[16,-19,32,-20,-23,-21,-16,47,-15,-17,-6,-18,-22,]),'INTEGER':([7,11,34,48,49,57,58,63,],[9,15,43,53,54,60,61,64,]),'{':([8,19,],[10,30,]),'TRANSLATE':([32,47,],[41,41,]),'}':([14,21,22,24,31,32,33,36,38,47,52,],[18,-10,-5,-8,-9,-12,-7,45,-11,-14,-13,]),'ID':([6,16,21,24,30,32,38,47,52,],[8,27,27,27,27,-12,-11,-14,-13,]),'DEF':([0,2,5,18,],[-3,6,-2,-4,]),'$end':([1,3,45,],[0,-1,-24,]),}
 
 _lr_action = { }
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'translation_node':([29,44,],[35,35,]),'primitive':([16,28,34,],[20,20,20,]),'transformation_nodes':([29,44,],[34,49,]),'default_color_definition':([10,],[12,]),'objects_definitions':([0,],[2,]),'scene':([2,],[3,]),'transformation_node':([29,44,],[36,36,]),'shape':([16,28,34,],[22,22,22,]),'object_body_rest':([16,28,34,],[21,32,43,]),'object_definition':([2,],[5,]),'program':([0,],[1,]),'object_body':([10,],[14,]),'usage':([16,28,34,],[24,24,24,]),'rectangle':([16,28,34,],[26,26,26,]),'rotate_node':([29,44,],[38,38,]),}
+_lr_goto_items = {'translation_node':([32,47,],[39,39,]),'primitive':([16,21,24,30,],[20,20,20,20,]),'transformation_nodes':([32,47,],[38,52,]),'default_color_definition':([10,],[12,]),'rectangle':([16,21,24,30,],[28,28,28,28,]),'objects_definitions':([0,],[2,]),'scene':([2,],[3,]),'shape_without_transformations':([16,21,24,30,],[21,21,21,21,]),'object_body_rest':([16,21,24,30,],[22,31,33,36,]),'object_definition':([2,],[5,]),'program':([0,],[1,]),'shape':([16,21,24,30,],[23,23,23,23,]),'object_body':([10,],[14,]),'usage':([16,21,24,30,],[26,26,26,26,]),'rotate_node':([32,47,],[42,42,]),'shape_with_transformations':([16,21,24,30,],[24,24,24,24,]),'transformation_node':([32,47,],[40,40,]),}
 
 _lr_goto = { }
 for _k, _v in _lr_goto_items.items():
@@ -26,25 +26,28 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> program","S'",1,None,None,None),
-  ('program -> objects_definitions scene','program',2,'p_program','/home/tpalys/Studia/sem6/tk/GraphLang/src/compiler/Parser.py',40),
-  ('objects_definitions -> objects_definitions object_definition','objects_definitions',2,'p_objects_definitions','/home/tpalys/Studia/sem6/tk/GraphLang/src/compiler/Parser.py',44),
-  ('objects_definitions -> <empty>','objects_definitions',0,'p_objects_definitions','/home/tpalys/Studia/sem6/tk/GraphLang/src/compiler/Parser.py',45),
-  ('object_definition -> DEF ID { object_body }','object_definition',5,'p_object_definition','/home/tpalys/Studia/sem6/tk/GraphLang/src/compiler/Parser.py',53),
-  ('object_body -> default_color_definition ; object_body_rest','object_body',3,'p_object_body','/home/tpalys/Studia/sem6/tk/GraphLang/src/compiler/Parser.py',57),
-  ('default_color_definition -> DEFAULT_COLOR ( FLOAT , FLOAT , FLOAT )','default_color_definition',8,'p_default_color_definition','/home/tpalys/Studia/sem6/tk/GraphLang/src/compiler/Parser.py',61),
-  ('object_body_rest -> shape ; transformation_nodes object_body_rest','object_body_rest',4,'p_object_body_rest','/home/tpalys/Studia/sem6/tk/GraphLang/src/compiler/Parser.py',65),
-  ('object_body_rest -> shape ; transformation_nodes','object_body_rest',3,'p_object_body_rest','/home/tpalys/Studia/sem6/tk/GraphLang/src/compiler/Parser.py',66),
-  ('object_body_rest -> shape ;','object_body_rest',2,'p_object_body_rest','/home/tpalys/Studia/sem6/tk/GraphLang/src/compiler/Parser.py',67),
-  ('transformation_nodes -> transformation_node ; transformation_nodes','transformation_nodes',3,'p_transformation_nodes','/home/tpalys/Studia/sem6/tk/GraphLang/src/compiler/Parser.py',82),
-  ('transformation_nodes -> transformation_node ;','transformation_nodes',2,'p_transformation_nodes','/home/tpalys/Studia/sem6/tk/GraphLang/src/compiler/Parser.py',83),
-  ('transformation_node -> rotate_node','transformation_node',1,'p_transformation_node','/home/tpalys/Studia/sem6/tk/GraphLang/src/compiler/Parser.py',92),
-  ('transformation_node -> translation_node','transformation_node',1,'p_transformation_node','/home/tpalys/Studia/sem6/tk/GraphLang/src/compiler/Parser.py',93),
-  ('rotate_node -> ROTATE ( FLOAT )','rotate_node',4,'p_rotate_node','/home/tpalys/Studia/sem6/tk/GraphLang/src/compiler/Parser.py',97),
-  ('translation_node -> TRANSLATE ( INTEGER , INTEGER )','translation_node',6,'p_translation_node','/home/tpalys/Studia/sem6/tk/GraphLang/src/compiler/Parser.py',101),
-  ('shape -> primitive','shape',1,'p_shape','/home/tpalys/Studia/sem6/tk/GraphLang/src/compiler/Parser.py',105),
-  ('shape -> usage','shape',1,'p_shape','/home/tpalys/Studia/sem6/tk/GraphLang/src/compiler/Parser.py',106),
-  ('primitive -> rectangle','primitive',1,'p_primitive','/home/tpalys/Studia/sem6/tk/GraphLang/src/compiler/Parser.py',110),
-  ('rectangle -> RECTANGLE ( INTEGER , INTEGER , INTEGER , INTEGER )','rectangle',10,'p_rectangle','/home/tpalys/Studia/sem6/tk/GraphLang/src/compiler/Parser.py',114),
-  ('usage -> ID','usage',1,'p_usage','/home/tpalys/Studia/sem6/tk/GraphLang/src/compiler/Parser.py',118),
-  ('scene -> SCENE ( INTEGER , INTEGER ) { object_body_rest }','scene',9,'p_scene','/home/tpalys/Studia/sem6/tk/GraphLang/src/compiler/Parser.py',122),
+  ('program -> objects_definitions scene','program',2,'p_program','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',40),
+  ('objects_definitions -> objects_definitions object_definition','objects_definitions',2,'p_objects_definitions','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',44),
+  ('objects_definitions -> <empty>','objects_definitions',0,'p_objects_definitions','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',45),
+  ('object_definition -> DEF ID { object_body }','object_definition',5,'p_object_definition','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',53),
+  ('object_body -> default_color_definition ; object_body_rest','object_body',3,'p_object_body','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',57),
+  ('default_color_definition -> DEFAULT_COLOR ( FLOAT , FLOAT , FLOAT )','default_color_definition',8,'p_default_color_definition','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',61),
+  ('object_body_rest -> shape_with_transformations object_body_rest','object_body_rest',2,'p_object_body_rest','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',65),
+  ('object_body_rest -> shape_with_transformations','object_body_rest',1,'p_object_body_rest','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',66),
+  ('object_body_rest -> shape_without_transformations object_body_rest','object_body_rest',2,'p_object_body_rest','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',67),
+  ('object_body_rest -> shape_without_transformations','object_body_rest',1,'p_object_body_rest','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',68),
+  ('shape_with_transformations -> shape ; transformation_nodes','shape_with_transformations',3,'p_shape_with_transformations','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',90),
+  ('shape_without_transformations -> shape ;','shape_without_transformations',2,'p_shape_without_transformations','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',98),
+  ('transformation_nodes -> transformation_node ; transformation_nodes','transformation_nodes',3,'p_transformation_nodes','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',104),
+  ('transformation_nodes -> transformation_node ;','transformation_nodes',2,'p_transformation_nodes','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',105),
+  ('transformation_node -> rotate_node','transformation_node',1,'p_transformation_node','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',114),
+  ('transformation_node -> translation_node','transformation_node',1,'p_transformation_node','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',115),
+  ('rotate_node -> ROTATE ( FLOAT )','rotate_node',4,'p_rotate_node','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',119),
+  ('translation_node -> TRANSLATE ( INTEGER , INTEGER )','translation_node',6,'p_translation_node','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',123),
+  ('shape -> primitive','shape',1,'p_shape','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',127),
+  ('shape -> usage','shape',1,'p_shape','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',128),
+  ('primitive -> rectangle','primitive',1,'p_primitive','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',132),
+  ('rectangle -> RECTANGLE ( INTEGER , INTEGER , INTEGER , INTEGER )','rectangle',10,'p_rectangle','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',136),
+  ('usage -> ID','usage',1,'p_usage','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',140),
+  ('scene -> SCENE ( INTEGER , INTEGER ) { object_body_rest }','scene',9,'p_scene','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',144),
 ]

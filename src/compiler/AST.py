@@ -4,12 +4,7 @@ Created on 19 kwi 2014
 @author: tpalys
 '''
 
-import src.scene.shape2d.primitives.Rectangle as Rec
-from src.scene.shape2d.nodes.transformation import RotationNode, TranslationNode
-import src.scene.shape2d.nodes.add.OrNode as OrNode
-import src.scene.shape2d.nodes.ColorNode as ColorNode
-from src.scene.shape2d.OperationList2D import OperationList2D
-import src.scene.Scene as SScene
+import src.scene.scene as scene
 
 objects = {}
 
@@ -19,8 +14,10 @@ class Program(object):
         self.scene = scene
 
     def toScene(self):
-        print "Program.toScene"
         return self.scene.toScene()
+
+    def __str__(self):
+        return "Program: \n" + str(self.objects_definitions) + str(self.scene)
 
 
 class ObjectsDefinitions(object):
@@ -33,15 +30,23 @@ class ObjectsDefinitions(object):
     def extend(self, definitions):
         self.definitions.extend(definitions)
 
+    def __str__(self):
+        s = "Objects definitions: \n"
+        for x in self.definitions:
+            s += str(x) + "\n"
+        return s
+
 class ObjectDefinition(object):
     def __init__(self, ID, body):
         self.ID = ID
         self.body = body
-        objects[ID] = self
+        objects[ID] = body
 
     def toScene(self):
-        print "ObjectDefinition.toScene"
         return self.body.toScene()
+
+    def __str__(self):
+        return "Object definition: " + self.ID + "\n" + str(self.body)
 
 
 class ObjectBody(object):
@@ -50,10 +55,12 @@ class ObjectBody(object):
         self.rest = rest
 
     def toScene(self):
-        print "ObjectBody.toScene"
-        operations = OperationList2D([self.default_color.toScene()])
-        operations.addChildren(self.rest.toScene())
-        return operations
+        s = [self.default_color.toScene()]
+        s.extend(self.rest.toScene())
+        return s
+
+    def __str__(self):
+        return "Object body: \n" + str(self.default_color) + str(self.rest)
 
 
 class ColorDefinition(object):
@@ -63,8 +70,10 @@ class ColorDefinition(object):
         self.blue = blue
 
     def toScene(self):
-        print "ColorDefinition.toScene"
-        return ColorNode.ColorNode(self.red, self.green, self.blue)
+        return scene.Color(self.red, self.green, self.blue)
+
+    def __str__(self):
+        return "color: {0} {1} {2}\n".format(self.red, self.green, self.blue)
 
 class ObjectBodyRest(object):
     def __init__(self):
@@ -76,9 +85,26 @@ class ObjectBodyRest(object):
     def extend(self, nodes):
         self.nodeList.extend(nodes)
 
+    def reverse(self):
+        self.nodeList.reverse()
+
     def toScene(self):
-        print "ObjectBodyRest.toScene"
-        return [x.toScene() for x in self.nodeList]
+        s = []
+        l = [x.toScene() for x in self.nodeList]
+
+        for x in l:
+            if type(x) is list:
+                s.extend(x)
+            else:
+                s.append(x)
+
+        return s
+
+    def __str__(self):
+        s = "Object body rest :"
+        for x in self.nodeList:
+            s += str(x) + "\n"
+        return s
 
 class TransformationNodes(object):
     def __init__(self):
@@ -91,7 +117,6 @@ class TransformationNodes(object):
         self.nodes.extend(nodes)
 
     def toScene(self):
-        print "TransformationNodes.toScene"
         return [x.toScene() for x in self.nodes]
 
 class Node(object):
@@ -102,10 +127,11 @@ class UsageNode(Node):
         self.ID = ID
 
     def toScene(self):
-        print "UsageNode.toScene"
         s =  objects[self.ID].toScene()
-        print "UsageNode.toScene ----- END"
         return s
+
+    def __str__(self):
+        return "Usage of " + self.ID + "\nBody is: \n" + str(objects[self.ID])
 
 class TransformationNode(Node):
     pass
@@ -121,17 +147,14 @@ class Rectangle(Primitive):
         self.right = right
 
     def toScene(self):
-        print "Rectangle.toScene"
-        rec =  Rec.Rectangle(self.right - self.left, self.bottom - self.top, self.left, self.right)
-        return OrNode.OrNode(rec)
+        return scene.Rectangle(self.left, self.right, self.bottom, self.top)
 
 class Rotation(TransformationNode):
     def __init__(self, angle):
         self.angle = angle
 
     def toScene(self):
-        print "Rotation.toScene"
-        return RotationNode.RotationNode(self.angle)
+        return scene.Rotation(self.angle)
 
 class Translation(TransformationNode):
     def __init__(self, dx, dy):
@@ -139,8 +162,7 @@ class Translation(TransformationNode):
         self.dy = dy
 
     def toScene(self):
-        print "Translation.toScene"
-        return TranslationNode.TranslationNode(self.dx, self.dy)
+        return scene.Translation(self.dx, self.dy)
 
 class Scene(object):
     def __init__(self, width, height, body):
@@ -149,9 +171,9 @@ class Scene(object):
         self.body = body
 
     def toScene(self):
-        print "Scene.toScene"
-        s = SScene.Scene(self.width, self.height)
-        for x in self.body.toScene():
-            s.addComponent(x)
-        print "Scene.toScene ---------- END"
+        s = scene.Scene(self.width, self.height)
+        s.extend(self.body.toScene())
         return s
+
+    def __str__(self):
+        return "scene: {0} {1}\n".format(self.width, self.height) + str(self.body)

@@ -24,4 +24,6 @@ class Compiler(object):
 # parser.parse(text, lexer=graphParser.scanner)
 
         ast = parser.parse(text, lexer=graphParser.scanner)
+
+
         return ast.toScene()

@@ -62,21 +62,31 @@ class Parser(object):
         p[0] = AST.ColorDefinition(float(p[3]), float(p[5]), float(p[7]))
 
     def p_object_body_rest(self, p):
-        """object_body_rest : shape ';' transformation_nodes object_body_rest
-                            | shape ';' transformation_nodes
-                            | shape ';'"""
-        if len(p) < 5:
-            p[0] = AST.ObjectBodyRest()
+        """object_body_rest : shape_with_transformations object_body_rest
+                            | shape_with_transformations
+                            | shape_without_transformations object_body_rest
+                            | shape_without_transformations"""
 
-        if len(p) == 3:
-            p[0].append(p[1])
-        elif len(p) == 4:
-            p[0].append(p[1])
-            p[0].extend(p[3].nodes)
-        else:
-            p[4].append(p[1])
-            p[4].extend(p[3].nodes)
-            p[0] = p[4]
+        p[0] = AST.ObjectBodyRest()
+
+        p[0].extend(p[1].nodeList)
+
+        if (len(p) == 3):
+            p[0].extend(p[2].nodeList)
+
+    def p_shape_with_transformations(self, p):
+        """shape_with_transformations : shape ';' transformation_nodes"""
+
+        p[0] = AST.ObjectBodyRest()
+        p[0].append(p[1])
+        p[0].extend(p[3].nodes)
+
+
+    def p_shape_without_transformations(self, p):
+        """shape_without_transformations : shape ';'"""
+
+        p[0] = AST.ObjectBodyRest()
+        p[0].append(p[1])
 
     def p_transformation_nodes(self, p):
         """transformation_nodes : transformation_node ';' transformation_nodes
@@ -85,7 +95,7 @@ class Parser(object):
             p[0] = AST.TransformationNodes()
             p[0].append(p[1])
         else:
-            p[3].append(p[1])
+            p[3].insert(0, p[1])
             p[0] = p[3]
 
     def p_transformation_node(self, p):

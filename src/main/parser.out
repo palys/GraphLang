@@ -17,63 +17,68 @@ Rule 3     objects_definitions -> <empty>
 Rule 4     object_definition -> DEF ID { object_body }
 Rule 5     object_body -> default_color_definition ; object_body_rest
 Rule 6     default_color_definition -> DEFAULT_COLOR ( FLOAT , FLOAT , FLOAT )
-Rule 7     object_body_rest -> shape ; transformation_nodes object_body_rest
-Rule 8     object_body_rest -> shape ; transformation_nodes
-Rule 9     object_body_rest -> shape ;
-Rule 10    transformation_nodes -> transformation_node ; transformation_nodes
-Rule 11    transformation_nodes -> transformation_node ;
-Rule 12    transformation_node -> rotate_node
-Rule 13    transformation_node -> translation_node
-Rule 14    rotate_node -> ROTATE ( FLOAT )
-Rule 15    translation_node -> TRANSLATE ( INTEGER , INTEGER )
-Rule 16    shape -> primitive
-Rule 17    shape -> usage
-Rule 18    primitive -> rectangle
-Rule 19    rectangle -> RECTANGLE ( INTEGER , INTEGER , INTEGER , INTEGER )
-Rule 20    usage -> ID
-Rule 21    scene -> SCENE ( INTEGER , INTEGER ) { object_body_rest }
+Rule 7     object_body_rest -> shape_with_transformations object_body_rest
+Rule 8     object_body_rest -> shape_with_transformations
+Rule 9     object_body_rest -> shape_without_transformations object_body_rest
+Rule 10    object_body_rest -> shape_without_transformations
+Rule 11    shape_with_transformations -> shape ; transformation_nodes
+Rule 12    shape_without_transformations -> shape ;
+Rule 13    transformation_nodes -> transformation_node ; transformation_nodes
+Rule 14    transformation_nodes -> transformation_node ;
+Rule 15    transformation_node -> rotate_node
+Rule 16    transformation_node -> translation_node
+Rule 17    rotate_node -> ROTATE ( FLOAT )
+Rule 18    translation_node -> TRANSLATE ( INTEGER , INTEGER )
+Rule 19    shape -> primitive
+Rule 20    shape -> usage
+Rule 21    primitive -> rectangle
+Rule 22    rectangle -> RECTANGLE ( INTEGER , INTEGER , INTEGER , INTEGER )
+Rule 23    usage -> ID
+Rule 24    scene -> SCENE ( INTEGER , INTEGER ) { object_body_rest }
 
 Terminals, with rules where they appear
 
-(                    : 6 14 15 19 21
-)                    : 6 14 15 19 21
-,                    : 6 6 15 19 19 19 21
-;                    : 5 7 8 9 10 11
+(                    : 6 17 18 22 24
+)                    : 6 17 18 22 24
+,                    : 6 6 18 22 22 22 24
+;                    : 5 11 12 13 14
 AND                  : 
 COLOR                : 
 DEF                  : 4
 DEFAULT_COLOR        : 6
-FLOAT                : 6 6 6 14
-ID                   : 4 20
-INTEGER              : 15 15 19 19 19 19 21 21
+FLOAT                : 6 6 6 17
+ID                   : 4 23
+INTEGER              : 18 18 22 22 22 22 24 24
 OR                   : 
-RECTANGLE            : 19
-ROTATE               : 14
-SCENE                : 21
+RECTANGLE            : 22
+ROTATE               : 17
+SCENE                : 24
 STRING               : 
-TRANSLATE            : 15
+TRANSLATE            : 18
 XOR                  : 
 error                : 
-{                    : 4 21
-}                    : 4 21
+{                    : 4 24
+}                    : 4 24
 
 Nonterminals, with rules where they appear
 
 default_color_definition : 5
 object_body          : 4
-object_body_rest     : 5 7 21
+object_body_rest     : 5 7 9 24
 object_definition    : 2
 objects_definitions  : 1 2
-primitive            : 16
+primitive            : 19
 program              : 0
-rectangle            : 18
-rotate_node          : 12
+rectangle            : 21
+rotate_node          : 15
 scene                : 1
-shape                : 7 8 9
-transformation_node  : 10 11
-transformation_nodes : 7 8 10
-translation_node     : 13
-usage                : 17
+shape                : 11 12
+shape_with_transformations : 7 8
+shape_without_transformations : 9 10
+transformation_node  : 13 14
+transformation_nodes : 11 13
+translation_node     : 16
+usage                : 20
 
 Parsing method: LALR
 
@@ -100,7 +105,7 @@ state 2
 
     (1) program -> objects_definitions . scene
     (2) objects_definitions -> objects_definitions . object_definition
-    (21) scene -> . SCENE ( INTEGER , INTEGER ) { object_body_rest }
+    (24) scene -> . SCENE ( INTEGER , INTEGER ) { object_body_rest }
     (4) object_definition -> . DEF ID { object_body }
 
     SCENE           shift and go to state 4
@@ -118,7 +123,7 @@ state 3
 
 state 4
 
-    (21) scene -> SCENE . ( INTEGER , INTEGER ) { object_body_rest }
+    (24) scene -> SCENE . ( INTEGER , INTEGER ) { object_body_rest }
 
     (               shift and go to state 7
 
@@ -140,7 +145,7 @@ state 6
 
 state 7
 
-    (21) scene -> SCENE ( . INTEGER , INTEGER ) { object_body_rest }
+    (24) scene -> SCENE ( . INTEGER , INTEGER ) { object_body_rest }
 
     INTEGER         shift and go to state 9
 
@@ -154,7 +159,7 @@ state 8
 
 state 9
 
-    (21) scene -> SCENE ( INTEGER . , INTEGER ) { object_body_rest }
+    (24) scene -> SCENE ( INTEGER . , INTEGER ) { object_body_rest }
 
     ,               shift and go to state 11
 
@@ -172,7 +177,7 @@ state 10
 
 state 11
 
-    (21) scene -> SCENE ( INTEGER , . INTEGER ) { object_body_rest }
+    (24) scene -> SCENE ( INTEGER , . INTEGER ) { object_body_rest }
 
     INTEGER         shift and go to state 15
 
@@ -200,7 +205,7 @@ state 14
 
 state 15
 
-    (21) scene -> SCENE ( INTEGER , INTEGER . ) { object_body_rest }
+    (24) scene -> SCENE ( INTEGER , INTEGER . ) { object_body_rest }
 
     )               shift and go to state 19
 
@@ -208,29 +213,34 @@ state 15
 state 16
 
     (5) object_body -> default_color_definition ; . object_body_rest
-    (7) object_body_rest -> . shape ; transformation_nodes object_body_rest
-    (8) object_body_rest -> . shape ; transformation_nodes
-    (9) object_body_rest -> . shape ;
-    (16) shape -> . primitive
-    (17) shape -> . usage
-    (18) primitive -> . rectangle
-    (20) usage -> . ID
-    (19) rectangle -> . RECTANGLE ( INTEGER , INTEGER , INTEGER , INTEGER )
+    (7) object_body_rest -> . shape_with_transformations object_body_rest
+    (8) object_body_rest -> . shape_with_transformations
+    (9) object_body_rest -> . shape_without_transformations object_body_rest
+    (10) object_body_rest -> . shape_without_transformations
+    (11) shape_with_transformations -> . shape ; transformation_nodes
+    (12) shape_without_transformations -> . shape ;
+    (19) shape -> . primitive
+    (20) shape -> . usage
+    (21) primitive -> . rectangle
+    (23) usage -> . ID
+    (22) rectangle -> . RECTANGLE ( INTEGER , INTEGER , INTEGER , INTEGER )
 
-    ID              shift and go to state 25
-    RECTANGLE       shift and go to state 23
+    ID              shift and go to state 27
+    RECTANGLE       shift and go to state 25
 
     primitive                      shift and go to state 20
-    object_body_rest               shift and go to state 21
-    shape                          shift and go to state 22
-    usage                          shift and go to state 24
-    rectangle                      shift and go to state 26
+    shape_without_transformations  shift and go to state 21
+    object_body_rest               shift and go to state 22
+    shape                          shift and go to state 23
+    shape_with_transformations     shift and go to state 24
+    usage                          shift and go to state 26
+    rectangle                      shift and go to state 28
 
 state 17
 
     (6) default_color_definition -> DEFAULT_COLOR ( . FLOAT , FLOAT , FLOAT )
 
-    FLOAT           shift and go to state 27
+    FLOAT           shift and go to state 29
 
 
 state 18
@@ -243,372 +253,426 @@ state 18
 
 state 19
 
-    (21) scene -> SCENE ( INTEGER , INTEGER ) . { object_body_rest }
+    (24) scene -> SCENE ( INTEGER , INTEGER ) . { object_body_rest }
 
-    {               shift and go to state 28
+    {               shift and go to state 30
 
 
 state 20
 
-    (16) shape -> primitive .
+    (19) shape -> primitive .
 
-    ;               reduce using rule 16 (shape -> primitive .)
+    ;               reduce using rule 19 (shape -> primitive .)
 
 
 state 21
+
+    (9) object_body_rest -> shape_without_transformations . object_body_rest
+    (10) object_body_rest -> shape_without_transformations .
+    (7) object_body_rest -> . shape_with_transformations object_body_rest
+    (8) object_body_rest -> . shape_with_transformations
+    (9) object_body_rest -> . shape_without_transformations object_body_rest
+    (10) object_body_rest -> . shape_without_transformations
+    (11) shape_with_transformations -> . shape ; transformation_nodes
+    (12) shape_without_transformations -> . shape ;
+    (19) shape -> . primitive
+    (20) shape -> . usage
+    (21) primitive -> . rectangle
+    (23) usage -> . ID
+    (22) rectangle -> . RECTANGLE ( INTEGER , INTEGER , INTEGER , INTEGER )
+
+    }               reduce using rule 10 (object_body_rest -> shape_without_transformations .)
+    ID              shift and go to state 27
+    RECTANGLE       shift and go to state 25
+
+    primitive                      shift and go to state 20
+    shape_without_transformations  shift and go to state 21
+    object_body_rest               shift and go to state 31
+    shape                          shift and go to state 23
+    shape_with_transformations     shift and go to state 24
+    usage                          shift and go to state 26
+    rectangle                      shift and go to state 28
+
+state 22
 
     (5) object_body -> default_color_definition ; object_body_rest .
 
     }               reduce using rule 5 (object_body -> default_color_definition ; object_body_rest .)
 
 
-state 22
-
-    (7) object_body_rest -> shape . ; transformation_nodes object_body_rest
-    (8) object_body_rest -> shape . ; transformation_nodes
-    (9) object_body_rest -> shape . ;
-
-    ;               shift and go to state 29
-
-
 state 23
 
-    (19) rectangle -> RECTANGLE . ( INTEGER , INTEGER , INTEGER , INTEGER )
+    (11) shape_with_transformations -> shape . ; transformation_nodes
+    (12) shape_without_transformations -> shape . ;
 
-    (               shift and go to state 30
+    ;               shift and go to state 32
 
 
 state 24
 
-    (17) shape -> usage .
+    (7) object_body_rest -> shape_with_transformations . object_body_rest
+    (8) object_body_rest -> shape_with_transformations .
+    (7) object_body_rest -> . shape_with_transformations object_body_rest
+    (8) object_body_rest -> . shape_with_transformations
+    (9) object_body_rest -> . shape_without_transformations object_body_rest
+    (10) object_body_rest -> . shape_without_transformations
+    (11) shape_with_transformations -> . shape ; transformation_nodes
+    (12) shape_without_transformations -> . shape ;
+    (19) shape -> . primitive
+    (20) shape -> . usage
+    (21) primitive -> . rectangle
+    (23) usage -> . ID
+    (22) rectangle -> . RECTANGLE ( INTEGER , INTEGER , INTEGER , INTEGER )
 
-    ;               reduce using rule 17 (shape -> usage .)
+    }               reduce using rule 8 (object_body_rest -> shape_with_transformations .)
+    ID              shift and go to state 27
+    RECTANGLE       shift and go to state 25
 
+    primitive                      shift and go to state 20
+    shape_without_transformations  shift and go to state 21
+    object_body_rest               shift and go to state 33
+    shape                          shift and go to state 23
+    shape_with_transformations     shift and go to state 24
+    usage                          shift and go to state 26
+    rectangle                      shift and go to state 28
 
 state 25
 
-    (20) usage -> ID .
+    (22) rectangle -> RECTANGLE . ( INTEGER , INTEGER , INTEGER , INTEGER )
 
-    ;               reduce using rule 20 (usage -> ID .)
+    (               shift and go to state 34
 
 
 state 26
 
-    (18) primitive -> rectangle .
+    (20) shape -> usage .
 
-    ;               reduce using rule 18 (primitive -> rectangle .)
+    ;               reduce using rule 20 (shape -> usage .)
 
 
 state 27
 
-    (6) default_color_definition -> DEFAULT_COLOR ( FLOAT . , FLOAT , FLOAT )
+    (23) usage -> ID .
 
-    ,               shift and go to state 31
+    ;               reduce using rule 23 (usage -> ID .)
 
 
 state 28
 
-    (21) scene -> SCENE ( INTEGER , INTEGER ) { . object_body_rest }
-    (7) object_body_rest -> . shape ; transformation_nodes object_body_rest
-    (8) object_body_rest -> . shape ; transformation_nodes
-    (9) object_body_rest -> . shape ;
-    (16) shape -> . primitive
-    (17) shape -> . usage
-    (18) primitive -> . rectangle
-    (20) usage -> . ID
-    (19) rectangle -> . RECTANGLE ( INTEGER , INTEGER , INTEGER , INTEGER )
+    (21) primitive -> rectangle .
 
-    ID              shift and go to state 25
-    RECTANGLE       shift and go to state 23
+    ;               reduce using rule 21 (primitive -> rectangle .)
 
-    primitive                      shift and go to state 20
-    object_body_rest               shift and go to state 32
-    shape                          shift and go to state 22
-    usage                          shift and go to state 24
-    rectangle                      shift and go to state 26
 
 state 29
 
-    (7) object_body_rest -> shape ; . transformation_nodes object_body_rest
-    (8) object_body_rest -> shape ; . transformation_nodes
-    (9) object_body_rest -> shape ; .
-    (10) transformation_nodes -> . transformation_node ; transformation_nodes
-    (11) transformation_nodes -> . transformation_node ;
-    (12) transformation_node -> . rotate_node
-    (13) transformation_node -> . translation_node
-    (14) rotate_node -> . ROTATE ( FLOAT )
-    (15) translation_node -> . TRANSLATE ( INTEGER , INTEGER )
+    (6) default_color_definition -> DEFAULT_COLOR ( FLOAT . , FLOAT , FLOAT )
 
-    }               reduce using rule 9 (object_body_rest -> shape ; .)
-    ROTATE          shift and go to state 33
-    TRANSLATE       shift and go to state 37
+    ,               shift and go to state 35
 
-    transformation_nodes           shift and go to state 34
-    translation_node               shift and go to state 35
-    transformation_node            shift and go to state 36
-    rotate_node                    shift and go to state 38
 
 state 30
 
-    (19) rectangle -> RECTANGLE ( . INTEGER , INTEGER , INTEGER , INTEGER )
+    (24) scene -> SCENE ( INTEGER , INTEGER ) { . object_body_rest }
+    (7) object_body_rest -> . shape_with_transformations object_body_rest
+    (8) object_body_rest -> . shape_with_transformations
+    (9) object_body_rest -> . shape_without_transformations object_body_rest
+    (10) object_body_rest -> . shape_without_transformations
+    (11) shape_with_transformations -> . shape ; transformation_nodes
+    (12) shape_without_transformations -> . shape ;
+    (19) shape -> . primitive
+    (20) shape -> . usage
+    (21) primitive -> . rectangle
+    (23) usage -> . ID
+    (22) rectangle -> . RECTANGLE ( INTEGER , INTEGER , INTEGER , INTEGER )
 
-    INTEGER         shift and go to state 39
+    ID              shift and go to state 27
+    RECTANGLE       shift and go to state 25
 
+    primitive                      shift and go to state 20
+    shape_without_transformations  shift and go to state 21
+    object_body_rest               shift and go to state 36
+    shape                          shift and go to state 23
+    shape_with_transformations     shift and go to state 24
+    usage                          shift and go to state 26
+    rectangle                      shift and go to state 28
 
 state 31
 
-    (6) default_color_definition -> DEFAULT_COLOR ( FLOAT , . FLOAT , FLOAT )
+    (9) object_body_rest -> shape_without_transformations object_body_rest .
 
-    FLOAT           shift and go to state 40
+    }               reduce using rule 9 (object_body_rest -> shape_without_transformations object_body_rest .)
 
 
 state 32
 
-    (21) scene -> SCENE ( INTEGER , INTEGER ) { object_body_rest . }
+    (11) shape_with_transformations -> shape ; . transformation_nodes
+    (12) shape_without_transformations -> shape ; .
+    (13) transformation_nodes -> . transformation_node ; transformation_nodes
+    (14) transformation_nodes -> . transformation_node ;
+    (15) transformation_node -> . rotate_node
+    (16) transformation_node -> . translation_node
+    (17) rotate_node -> . ROTATE ( FLOAT )
+    (18) translation_node -> . TRANSLATE ( INTEGER , INTEGER )
 
-    }               shift and go to state 41
+    ID              reduce using rule 12 (shape_without_transformations -> shape ; .)
+    RECTANGLE       reduce using rule 12 (shape_without_transformations -> shape ; .)
+    }               reduce using rule 12 (shape_without_transformations -> shape ; .)
+    ROTATE          shift and go to state 37
+    TRANSLATE       shift and go to state 41
 
+    translation_node               shift and go to state 39
+    transformation_nodes           shift and go to state 38
+    rotate_node                    shift and go to state 42
+    transformation_node            shift and go to state 40
 
 state 33
 
-    (14) rotate_node -> ROTATE . ( FLOAT )
+    (7) object_body_rest -> shape_with_transformations object_body_rest .
 
-    (               shift and go to state 42
+    }               reduce using rule 7 (object_body_rest -> shape_with_transformations object_body_rest .)
 
 
 state 34
 
-    (7) object_body_rest -> shape ; transformation_nodes . object_body_rest
-    (8) object_body_rest -> shape ; transformation_nodes .
-    (7) object_body_rest -> . shape ; transformation_nodes object_body_rest
-    (8) object_body_rest -> . shape ; transformation_nodes
-    (9) object_body_rest -> . shape ;
-    (16) shape -> . primitive
-    (17) shape -> . usage
-    (18) primitive -> . rectangle
-    (20) usage -> . ID
-    (19) rectangle -> . RECTANGLE ( INTEGER , INTEGER , INTEGER , INTEGER )
+    (22) rectangle -> RECTANGLE ( . INTEGER , INTEGER , INTEGER , INTEGER )
 
-    }               reduce using rule 8 (object_body_rest -> shape ; transformation_nodes .)
-    ID              shift and go to state 25
-    RECTANGLE       shift and go to state 23
+    INTEGER         shift and go to state 43
 
-    primitive                      shift and go to state 20
-    object_body_rest               shift and go to state 43
-    shape                          shift and go to state 22
-    usage                          shift and go to state 24
-    rectangle                      shift and go to state 26
 
 state 35
 
-    (13) transformation_node -> translation_node .
+    (6) default_color_definition -> DEFAULT_COLOR ( FLOAT , . FLOAT , FLOAT )
 
-    ;               reduce using rule 13 (transformation_node -> translation_node .)
+    FLOAT           shift and go to state 44
 
 
 state 36
 
-    (10) transformation_nodes -> transformation_node . ; transformation_nodes
-    (11) transformation_nodes -> transformation_node . ;
+    (24) scene -> SCENE ( INTEGER , INTEGER ) { object_body_rest . }
 
-    ;               shift and go to state 44
+    }               shift and go to state 45
 
 
 state 37
 
-    (15) translation_node -> TRANSLATE . ( INTEGER , INTEGER )
+    (17) rotate_node -> ROTATE . ( FLOAT )
 
-    (               shift and go to state 45
+    (               shift and go to state 46
 
 
 state 38
 
-    (12) transformation_node -> rotate_node .
+    (11) shape_with_transformations -> shape ; transformation_nodes .
 
-    ;               reduce using rule 12 (transformation_node -> rotate_node .)
+    ID              reduce using rule 11 (shape_with_transformations -> shape ; transformation_nodes .)
+    RECTANGLE       reduce using rule 11 (shape_with_transformations -> shape ; transformation_nodes .)
+    }               reduce using rule 11 (shape_with_transformations -> shape ; transformation_nodes .)
 
 
 state 39
 
-    (19) rectangle -> RECTANGLE ( INTEGER . , INTEGER , INTEGER , INTEGER )
+    (16) transformation_node -> translation_node .
 
-    ,               shift and go to state 46
+    ;               reduce using rule 16 (transformation_node -> translation_node .)
 
 
 state 40
 
-    (6) default_color_definition -> DEFAULT_COLOR ( FLOAT , FLOAT . , FLOAT )
+    (13) transformation_nodes -> transformation_node . ; transformation_nodes
+    (14) transformation_nodes -> transformation_node . ;
 
-    ,               shift and go to state 47
+    ;               shift and go to state 47
 
 
 state 41
 
-    (21) scene -> SCENE ( INTEGER , INTEGER ) { object_body_rest } .
+    (18) translation_node -> TRANSLATE . ( INTEGER , INTEGER )
 
-    $end            reduce using rule 21 (scene -> SCENE ( INTEGER , INTEGER ) { object_body_rest } .)
+    (               shift and go to state 48
 
 
 state 42
 
-    (14) rotate_node -> ROTATE ( . FLOAT )
+    (15) transformation_node -> rotate_node .
 
-    FLOAT           shift and go to state 48
+    ;               reduce using rule 15 (transformation_node -> rotate_node .)
 
 
 state 43
 
-    (7) object_body_rest -> shape ; transformation_nodes object_body_rest .
+    (22) rectangle -> RECTANGLE ( INTEGER . , INTEGER , INTEGER , INTEGER )
 
-    }               reduce using rule 7 (object_body_rest -> shape ; transformation_nodes object_body_rest .)
+    ,               shift and go to state 49
 
 
 state 44
 
-    (10) transformation_nodes -> transformation_node ; . transformation_nodes
-    (11) transformation_nodes -> transformation_node ; .
-    (10) transformation_nodes -> . transformation_node ; transformation_nodes
-    (11) transformation_nodes -> . transformation_node ;
-    (12) transformation_node -> . rotate_node
-    (13) transformation_node -> . translation_node
-    (14) rotate_node -> . ROTATE ( FLOAT )
-    (15) translation_node -> . TRANSLATE ( INTEGER , INTEGER )
+    (6) default_color_definition -> DEFAULT_COLOR ( FLOAT , FLOAT . , FLOAT )
 
-    ID              reduce using rule 11 (transformation_nodes -> transformation_node ; .)
-    RECTANGLE       reduce using rule 11 (transformation_nodes -> transformation_node ; .)
-    }               reduce using rule 11 (transformation_nodes -> transformation_node ; .)
-    ROTATE          shift and go to state 33
-    TRANSLATE       shift and go to state 37
+    ,               shift and go to state 50
 
-    translation_node               shift and go to state 35
-    transformation_node            shift and go to state 36
-    rotate_node                    shift and go to state 38
-    transformation_nodes           shift and go to state 49
 
 state 45
 
-    (15) translation_node -> TRANSLATE ( . INTEGER , INTEGER )
+    (24) scene -> SCENE ( INTEGER , INTEGER ) { object_body_rest } .
 
-    INTEGER         shift and go to state 50
+    $end            reduce using rule 24 (scene -> SCENE ( INTEGER , INTEGER ) { object_body_rest } .)
 
 
 state 46
 
-    (19) rectangle -> RECTANGLE ( INTEGER , . INTEGER , INTEGER , INTEGER )
+    (17) rotate_node -> ROTATE ( . FLOAT )
 
-    INTEGER         shift and go to state 51
+    FLOAT           shift and go to state 51
 
 
 state 47
 
-    (6) default_color_definition -> DEFAULT_COLOR ( FLOAT , FLOAT , . FLOAT )
+    (13) transformation_nodes -> transformation_node ; . transformation_nodes
+    (14) transformation_nodes -> transformation_node ; .
+    (13) transformation_nodes -> . transformation_node ; transformation_nodes
+    (14) transformation_nodes -> . transformation_node ;
+    (15) transformation_node -> . rotate_node
+    (16) transformation_node -> . translation_node
+    (17) rotate_node -> . ROTATE ( FLOAT )
+    (18) translation_node -> . TRANSLATE ( INTEGER , INTEGER )
 
-    FLOAT           shift and go to state 52
+    ID              reduce using rule 14 (transformation_nodes -> transformation_node ; .)
+    RECTANGLE       reduce using rule 14 (transformation_nodes -> transformation_node ; .)
+    }               reduce using rule 14 (transformation_nodes -> transformation_node ; .)
+    ROTATE          shift and go to state 37
+    TRANSLATE       shift and go to state 41
 
+    translation_node               shift and go to state 39
+    transformation_node            shift and go to state 40
+    rotate_node                    shift and go to state 42
+    transformation_nodes           shift and go to state 52
 
 state 48
 
-    (14) rotate_node -> ROTATE ( FLOAT . )
+    (18) translation_node -> TRANSLATE ( . INTEGER , INTEGER )
 
-    )               shift and go to state 53
+    INTEGER         shift and go to state 53
 
 
 state 49
 
-    (10) transformation_nodes -> transformation_node ; transformation_nodes .
+    (22) rectangle -> RECTANGLE ( INTEGER , . INTEGER , INTEGER , INTEGER )
 
-    ID              reduce using rule 10 (transformation_nodes -> transformation_node ; transformation_nodes .)
-    RECTANGLE       reduce using rule 10 (transformation_nodes -> transformation_node ; transformation_nodes .)
-    }               reduce using rule 10 (transformation_nodes -> transformation_node ; transformation_nodes .)
+    INTEGER         shift and go to state 54
 
 
 state 50
 
-    (15) translation_node -> TRANSLATE ( INTEGER . , INTEGER )
+    (6) default_color_definition -> DEFAULT_COLOR ( FLOAT , FLOAT , . FLOAT )
 
-    ,               shift and go to state 54
+    FLOAT           shift and go to state 55
 
 
 state 51
 
-    (19) rectangle -> RECTANGLE ( INTEGER , INTEGER . , INTEGER , INTEGER )
-
-    ,               shift and go to state 55
-
-
-state 52
-
-    (6) default_color_definition -> DEFAULT_COLOR ( FLOAT , FLOAT , FLOAT . )
+    (17) rotate_node -> ROTATE ( FLOAT . )
 
     )               shift and go to state 56
 
 
+state 52
+
+    (13) transformation_nodes -> transformation_node ; transformation_nodes .
+
+    ID              reduce using rule 13 (transformation_nodes -> transformation_node ; transformation_nodes .)
+    RECTANGLE       reduce using rule 13 (transformation_nodes -> transformation_node ; transformation_nodes .)
+    }               reduce using rule 13 (transformation_nodes -> transformation_node ; transformation_nodes .)
+
+
 state 53
 
-    (14) rotate_node -> ROTATE ( FLOAT ) .
+    (18) translation_node -> TRANSLATE ( INTEGER . , INTEGER )
 
-    ;               reduce using rule 14 (rotate_node -> ROTATE ( FLOAT ) .)
+    ,               shift and go to state 57
 
 
 state 54
 
-    (15) translation_node -> TRANSLATE ( INTEGER , . INTEGER )
+    (22) rectangle -> RECTANGLE ( INTEGER , INTEGER . , INTEGER , INTEGER )
 
-    INTEGER         shift and go to state 57
+    ,               shift and go to state 58
 
 
 state 55
 
-    (19) rectangle -> RECTANGLE ( INTEGER , INTEGER , . INTEGER , INTEGER )
+    (6) default_color_definition -> DEFAULT_COLOR ( FLOAT , FLOAT , FLOAT . )
 
-    INTEGER         shift and go to state 58
+    )               shift and go to state 59
 
 
 state 56
+
+    (17) rotate_node -> ROTATE ( FLOAT ) .
+
+    ;               reduce using rule 17 (rotate_node -> ROTATE ( FLOAT ) .)
+
+
+state 57
+
+    (18) translation_node -> TRANSLATE ( INTEGER , . INTEGER )
+
+    INTEGER         shift and go to state 60
+
+
+state 58
+
+    (22) rectangle -> RECTANGLE ( INTEGER , INTEGER , . INTEGER , INTEGER )
+
+    INTEGER         shift and go to state 61
+
+
+state 59
 
     (6) default_color_definition -> DEFAULT_COLOR ( FLOAT , FLOAT , FLOAT ) .
 
     ;               reduce using rule 6 (default_color_definition -> DEFAULT_COLOR ( FLOAT , FLOAT , FLOAT ) .)
 
 
-state 57
-
-    (15) translation_node -> TRANSLATE ( INTEGER , INTEGER . )
-
-    )               shift and go to state 59
-
-
-state 58
-
-    (19) rectangle -> RECTANGLE ( INTEGER , INTEGER , INTEGER . , INTEGER )
-
-    ,               shift and go to state 60
-
-
-state 59
-
-    (15) translation_node -> TRANSLATE ( INTEGER , INTEGER ) .
-
-    ;               reduce using rule 15 (translation_node -> TRANSLATE ( INTEGER , INTEGER ) .)
-
-
 state 60
 
-    (19) rectangle -> RECTANGLE ( INTEGER , INTEGER , INTEGER , . INTEGER )
-
-    INTEGER         shift and go to state 61
-
-
-state 61
-
-    (19) rectangle -> RECTANGLE ( INTEGER , INTEGER , INTEGER , INTEGER . )
+    (18) translation_node -> TRANSLATE ( INTEGER , INTEGER . )
 
     )               shift and go to state 62
 
 
+state 61
+
+    (22) rectangle -> RECTANGLE ( INTEGER , INTEGER , INTEGER . , INTEGER )
+
+    ,               shift and go to state 63
+
+
 state 62
 
-    (19) rectangle -> RECTANGLE ( INTEGER , INTEGER , INTEGER , INTEGER ) .
+    (18) translation_node -> TRANSLATE ( INTEGER , INTEGER ) .
 
-    ;               reduce using rule 19 (rectangle -> RECTANGLE ( INTEGER , INTEGER , INTEGER , INTEGER ) .)
+    ;               reduce using rule 18 (translation_node -> TRANSLATE ( INTEGER , INTEGER ) .)
+
+
+state 63
+
+    (22) rectangle -> RECTANGLE ( INTEGER , INTEGER , INTEGER , . INTEGER )
+
+    INTEGER         shift and go to state 64
+
+
+state 64
+
+    (22) rectangle -> RECTANGLE ( INTEGER , INTEGER , INTEGER , INTEGER . )
+
+    )               shift and go to state 65
+
+
+state 65
+
+    (22) rectangle -> RECTANGLE ( INTEGER , INTEGER , INTEGER , INTEGER ) .
+
+    ;               reduce using rule 22 (rectangle -> RECTANGLE ( INTEGER , INTEGER , INTEGER , INTEGER ) .)
 

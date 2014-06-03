@@ -8,6 +8,7 @@ def dwa_prostakaty
 {
     default_color(1.0, 1.0, 1.0);
     prostakat;
+    rectangle(100, 50, 300, 300);
     /*color(1.0, 0.5, 0.5);*/
     rotate(90.0);
     prostakat;
@@ -16,5 +17,5 @@ def dwa_prostakaty
 scene(800, 600)
 {
     dwa_prostakaty;
-    translate(200, -200);
+    translate(200, 200);
 }

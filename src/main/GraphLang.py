@@ -6,7 +6,6 @@ Created on 19 kwi 2014
 
 import sys
 from src.compiler.Compiler import Compiler
-from src.scene.Scene import Scene
 
 if __name__ == '__main__':
 

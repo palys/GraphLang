@@ -1,0 +1,12 @@
+!SESSION 2014-04-08 14:04:01.619 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.7.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_GB
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY com.google.eclipse.mechanic 2 0 2014-04-08 14:04:41.299
+!MESSAGE Directory '/home/tpalys/.eclipse/mechanic' does not exist.
+
+!ENTRY com.google.eclipse.mechanic 2 0 2014-04-08 14:04:41.305
+!MESSAGE Directory '/opt/liclipse/configuration/com.google.eclipse.mechanic/mechanic' does not exist.
