@@ -6,6 +6,7 @@ Created on 19 kwi 2014
 
 import sys
 from src.compiler.Compiler import Compiler
+from src.painter.painter import Painter
 
 if __name__ == '__main__':
 
@@ -17,6 +18,8 @@ if __name__ == '__main__':
         scene = compiler.compile(text)
 
         print str(scene)
+        painter = Painter(scene)
+        painter.paintScene()
 #TODO
 
     except IOError:

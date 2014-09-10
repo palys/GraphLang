@@ -100,7 +100,8 @@ class Parser(object):
 
     def p_transformation_node(self, p):
         """transformation_node : rotate_node
-                               | translation_node"""
+                               | translation_node
+                               | scale_node"""
         p[0] = p[1]
 
     def p_rotate_node(self, p):
@@ -111,18 +112,47 @@ class Parser(object):
         """translation_node : TRANSLATE '(' INTEGER ',' INTEGER ')'"""
         p[0] = AST.Translation(int(p[3]), int(p[5]))
 
+    def p_scale_node(self, p):
+        """scale_node : SCALE '(' FLOAT ')'
+                      | SCALE '(' FLOAT ',' FLOAT ')'"""
+
+        if len(p) == 5:
+            p[0] = AST.Scale(float(p[3]), float(p[3]))
+        else:
+            p[0] = AST.Scale(float(p[3]), float(p[5]))
+
     def p_shape(self, p):
         """shape : primitive
                  | usage"""
         p[0] = p[1]
 
     def p_primitive(self, p):
-        """primitive : rectangle"""#TODO
+        """primitive : rectangle
+                     | circle
+                     | oval"""#TODO
         p[0] = p[1]
 
     def p_rectangle(self, p):
-        """rectangle : RECTANGLE '(' INTEGER ',' INTEGER ',' INTEGER ',' INTEGER ')'"""
-        p[0] = AST.Rectangle(int(p[3]), int(p[5]), int(p[7]), int(p[9]))
+        """rectangle : RECTANGLE '(' INTEGER ',' INTEGER ',' INTEGER ',' INTEGER ')'
+                     | RECTANGLE '(' INTEGER ',' INTEGER ',' INTEGER ',' INTEGER ',' INTEGER ')'"""
+
+        if len(p) == 11:
+            p[0] = AST.Rectangle(int(p[3]), int(p[5]), int(p[7]), int(p[9]))
+        else:
+            p[0] = AST.Rectangle(int(p[3]), int(p[5]), int(p[7]), int(p[9]), int(p[11]))
+
+    def p_circle(self, p):
+        """circle : CIRCLE '(' INTEGER ',' INTEGER ',' INTEGER ')'"""
+        p[0] = AST.Circle(int(p[3]), int(p[5]), int(p[7]))
+
+    def p_oval(self, p):
+        """oval : OVAL '(' INTEGER ',' INTEGER ',' INTEGER ',' INTEGER ')'
+                | OVAL '(' INTEGER ',' INTEGER ',' INTEGER ',' INTEGER ',' INTEGER ')'"""
+
+        if len(p) == 11:
+            p[0] = AST.Oval(int(p[3]), int(p[5]), int(p[7]), int(p[9]))
+        else:
+            p[0] = AST.Oval(int(p[3]), int(p[5]), int(p[7]), int(p[9]), int(p[11]))
 
     def p_usage(self, p):
         """usage : ID"""

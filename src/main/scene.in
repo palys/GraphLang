@@ -18,4 +18,9 @@ scene(800, 600)
 {
     dwa_prostakaty;
     translate(200, 200);
+    circle(100,100,30);
+    oval(150,150,10,30);
+    rectangle(0,0,200,100,30);
+    oval(250,250,70,80,50);
+    scale(0.5,2.0);
 }

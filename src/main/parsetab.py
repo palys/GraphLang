@@ -5,9 +5,9 @@ _tabversion = '3.2'
 
 _lr_method = 'LALR'
 
-_lr_signature = '6I\x12\xf6E\xc25K\xef \xed\xf1gq\x1a5'
+_lr_signature = '\xe7}\x1d\x8d\xac.tQ!]\x92b\xa7\x8at\x19'
     
-_lr_action_items = {'ROTATE':([32,47,],[37,37,]),')':([15,51,55,60,64,],[19,56,59,62,65,]),'(':([4,13,25,37,41,],[7,17,34,46,48,]),'FLOAT':([17,35,46,50,],[29,44,51,55,]),'SCENE':([0,2,5,18,],[-3,4,-2,-4,]),'DEFAULT_COLOR':([10,],[13,]),',':([9,29,43,44,53,54,61,],[11,35,49,50,57,58,63,]),'RECTANGLE':([16,21,24,30,32,38,47,52,],[25,25,25,25,-12,-11,-14,-13,]),';':([12,20,23,26,27,28,39,40,42,56,59,62,65,],[16,-19,32,-20,-23,-21,-16,47,-15,-17,-6,-18,-22,]),'INTEGER':([7,11,34,48,49,57,58,63,],[9,15,43,53,54,60,61,64,]),'{':([8,19,],[10,30,]),'TRANSLATE':([32,47,],[41,41,]),'}':([14,21,22,24,31,32,33,36,38,47,52,],[18,-10,-5,-8,-9,-12,-7,45,-11,-14,-13,]),'ID':([6,16,21,24,30,32,38,47,52,],[8,27,27,27,27,-12,-11,-14,-13,]),'DEF':([0,2,5,18,],[-3,6,-2,-4,]),'$end':([1,3,45,],[0,-1,-24,]),}
+_lr_action_items = {'ROTATE':([38,60,],[45,45,]),'RECTANGLE':([16,25,28,34,38,47,60,68,],[29,29,29,29,-12,-11,-14,-13,]),')':([15,66,67,71,80,82,83,90,91,96,97,],[19,74,75,79,85,87,88,92,94,98,99,]),'(':([4,13,21,22,29,45,49,51,],[7,17,35,36,40,58,59,61,]),'FLOAT':([17,41,58,59,63,76,],[33,54,66,67,71,82,]),'SCENE':([0,2,5,18,],[-3,4,-2,-4,]),'DEFAULT_COLOR':([10,],[13,]),',':([9,33,43,44,53,54,64,65,67,69,70,81,84,90,91,],[11,41,56,57,62,63,72,73,76,77,78,86,89,93,95,]),'SCALE':([38,60,],[49,49,]),'CIRCLE':([16,25,28,34,38,47,60,68,],[21,21,21,21,-12,-11,-14,-13,]),';':([12,20,23,24,27,30,31,32,46,48,50,52,74,75,79,85,87,88,92,94,98,99,],[16,-22,-26,-32,38,-23,-25,-24,-17,-16,60,-15,-18,-20,-6,-29,-21,-19,-30,-27,-31,-28,]),'OVAL':([16,25,28,34,38,47,60,68,],[22,22,22,22,-12,-11,-14,-13,]),'INTEGER':([7,11,35,36,40,56,57,61,62,72,73,77,78,86,89,93,95,],[9,15,43,44,53,64,65,69,70,80,81,83,84,90,91,96,97,]),'{':([8,19,],[10,34,]),'TRANSLATE':([38,60,],[51,51,]),'}':([14,25,26,28,37,38,39,42,47,60,68,],[18,-10,-5,-8,-9,-12,-7,55,-11,-14,-13,]),'ID':([6,16,25,28,34,38,47,60,68,],[8,24,24,24,24,-12,-11,-14,-13,]),'DEF':([0,2,5,18,],[-3,6,-2,-4,]),'$end':([1,3,55,],[0,-1,-33,]),}
 
 _lr_action = { }
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'translation_node':([32,47,],[39,39,]),'primitive':([16,21,24,30,],[20,20,20,20,]),'transformation_nodes':([32,47,],[38,52,]),'default_color_definition':([10,],[12,]),'rectangle':([16,21,24,30,],[28,28,28,28,]),'objects_definitions':([0,],[2,]),'scene':([2,],[3,]),'shape_without_transformations':([16,21,24,30,],[21,21,21,21,]),'object_body_rest':([16,21,24,30,],[22,31,33,36,]),'object_definition':([2,],[5,]),'program':([0,],[1,]),'shape':([16,21,24,30,],[23,23,23,23,]),'object_body':([10,],[14,]),'usage':([16,21,24,30,],[26,26,26,26,]),'rotate_node':([32,47,],[42,42,]),'shape_with_transformations':([16,21,24,30,],[24,24,24,24,]),'transformation_node':([32,47,],[40,40,]),}
+_lr_goto_items = {'translation_node':([38,60,],[48,48,]),'primitive':([16,25,28,34,],[20,20,20,20,]),'scale_node':([38,60,],[46,46,]),'transformation_nodes':([38,60,],[47,68,]),'default_color_definition':([10,],[12,]),'rectangle':([16,25,28,34,],[32,32,32,32,]),'objects_definitions':([0,],[2,]),'scene':([2,],[3,]),'transformation_node':([38,60,],[50,50,]),'shape_without_transformations':([16,25,28,34,],[25,25,25,25,]),'object_body_rest':([16,25,28,34,],[26,37,39,42,]),'object_definition':([2,],[5,]),'program':([0,],[1,]),'shape':([16,25,28,34,],[27,27,27,27,]),'object_body':([10,],[14,]),'usage':([16,25,28,34,],[30,30,30,30,]),'circle':([16,25,28,34,],[31,31,31,31,]),'oval':([16,25,28,34,],[23,23,23,23,]),'shape_with_transformations':([16,25,28,34,],[28,28,28,28,]),'rotate_node':([38,60,],[52,52,]),}
 
 _lr_goto = { }
 for _k, _v in _lr_goto_items.items():
@@ -26,28 +26,37 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> program","S'",1,None,None,None),
-  ('program -> objects_definitions scene','program',2,'p_program','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',40),
-  ('objects_definitions -> objects_definitions object_definition','objects_definitions',2,'p_objects_definitions','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',44),
-  ('objects_definitions -> <empty>','objects_definitions',0,'p_objects_definitions','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',45),
-  ('object_definition -> DEF ID { object_body }','object_definition',5,'p_object_definition','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',53),
-  ('object_body -> default_color_definition ; object_body_rest','object_body',3,'p_object_body','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',57),
-  ('default_color_definition -> DEFAULT_COLOR ( FLOAT , FLOAT , FLOAT )','default_color_definition',8,'p_default_color_definition','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',61),
-  ('object_body_rest -> shape_with_transformations object_body_rest','object_body_rest',2,'p_object_body_rest','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',65),
-  ('object_body_rest -> shape_with_transformations','object_body_rest',1,'p_object_body_rest','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',66),
-  ('object_body_rest -> shape_without_transformations object_body_rest','object_body_rest',2,'p_object_body_rest','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',67),
-  ('object_body_rest -> shape_without_transformations','object_body_rest',1,'p_object_body_rest','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',68),
-  ('shape_with_transformations -> shape ; transformation_nodes','shape_with_transformations',3,'p_shape_with_transformations','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',90),
-  ('shape_without_transformations -> shape ;','shape_without_transformations',2,'p_shape_without_transformations','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',98),
-  ('transformation_nodes -> transformation_node ; transformation_nodes','transformation_nodes',3,'p_transformation_nodes','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',104),
-  ('transformation_nodes -> transformation_node ;','transformation_nodes',2,'p_transformation_nodes','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',105),
-  ('transformation_node -> rotate_node','transformation_node',1,'p_transformation_node','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',114),
-  ('transformation_node -> translation_node','transformation_node',1,'p_transformation_node','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',115),
-  ('rotate_node -> ROTATE ( FLOAT )','rotate_node',4,'p_rotate_node','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',119),
-  ('translation_node -> TRANSLATE ( INTEGER , INTEGER )','translation_node',6,'p_translation_node','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',123),
-  ('shape -> primitive','shape',1,'p_shape','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',127),
-  ('shape -> usage','shape',1,'p_shape','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',128),
-  ('primitive -> rectangle','primitive',1,'p_primitive','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',132),
-  ('rectangle -> RECTANGLE ( INTEGER , INTEGER , INTEGER , INTEGER )','rectangle',10,'p_rectangle','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',136),
-  ('usage -> ID','usage',1,'p_usage','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',140),
-  ('scene -> SCENE ( INTEGER , INTEGER ) { object_body_rest }','scene',9,'p_scene','/home/tpalys/studia/sem6/tk/GraphLang/GraphLang/src/compiler/Parser.py',144),
+  ('program -> objects_definitions scene','program',2,'p_program','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',40),
+  ('objects_definitions -> objects_definitions object_definition','objects_definitions',2,'p_objects_definitions','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',44),
+  ('objects_definitions -> <empty>','objects_definitions',0,'p_objects_definitions','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',45),
+  ('object_definition -> DEF ID { object_body }','object_definition',5,'p_object_definition','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',53),
+  ('object_body -> default_color_definition ; object_body_rest','object_body',3,'p_object_body','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',57),
+  ('default_color_definition -> DEFAULT_COLOR ( FLOAT , FLOAT , FLOAT )','default_color_definition',8,'p_default_color_definition','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',61),
+  ('object_body_rest -> shape_with_transformations object_body_rest','object_body_rest',2,'p_object_body_rest','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',65),
+  ('object_body_rest -> shape_with_transformations','object_body_rest',1,'p_object_body_rest','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',66),
+  ('object_body_rest -> shape_without_transformations object_body_rest','object_body_rest',2,'p_object_body_rest','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',67),
+  ('object_body_rest -> shape_without_transformations','object_body_rest',1,'p_object_body_rest','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',68),
+  ('shape_with_transformations -> shape ; transformation_nodes','shape_with_transformations',3,'p_shape_with_transformations','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',78),
+  ('shape_without_transformations -> shape ;','shape_without_transformations',2,'p_shape_without_transformations','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',86),
+  ('transformation_nodes -> transformation_node ; transformation_nodes','transformation_nodes',3,'p_transformation_nodes','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',92),
+  ('transformation_nodes -> transformation_node ;','transformation_nodes',2,'p_transformation_nodes','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',93),
+  ('transformation_node -> rotate_node','transformation_node',1,'p_transformation_node','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',102),
+  ('transformation_node -> translation_node','transformation_node',1,'p_transformation_node','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',103),
+  ('transformation_node -> scale_node','transformation_node',1,'p_transformation_node','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',104),
+  ('rotate_node -> ROTATE ( FLOAT )','rotate_node',4,'p_rotate_node','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',108),
+  ('translation_node -> TRANSLATE ( INTEGER , INTEGER )','translation_node',6,'p_translation_node','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',112),
+  ('scale_node -> SCALE ( FLOAT )','scale_node',4,'p_scale_node','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',116),
+  ('scale_node -> SCALE ( FLOAT , FLOAT )','scale_node',6,'p_scale_node','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',117),
+  ('shape -> primitive','shape',1,'p_shape','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',125),
+  ('shape -> usage','shape',1,'p_shape','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',126),
+  ('primitive -> rectangle','primitive',1,'p_primitive','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',130),
+  ('primitive -> circle','primitive',1,'p_primitive','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',131),
+  ('primitive -> oval','primitive',1,'p_primitive','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',132),
+  ('rectangle -> RECTANGLE ( INTEGER , INTEGER , INTEGER , INTEGER )','rectangle',10,'p_rectangle','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',136),
+  ('rectangle -> RECTANGLE ( INTEGER , INTEGER , INTEGER , INTEGER , INTEGER )','rectangle',12,'p_rectangle','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',137),
+  ('circle -> CIRCLE ( INTEGER , INTEGER , INTEGER )','circle',8,'p_circle','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',145),
+  ('oval -> OVAL ( INTEGER , INTEGER , INTEGER , INTEGER )','oval',10,'p_oval','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',149),
+  ('oval -> OVAL ( INTEGER , INTEGER , INTEGER , INTEGER , INTEGER )','oval',12,'p_oval','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',150),
+  ('usage -> ID','usage',1,'p_usage','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',158),
+  ('scene -> SCENE ( INTEGER , INTEGER ) { object_body_rest }','scene',9,'p_scene','/home/Natalia/Dokumenty/studia/teka/GraphLang/src/compiler/Parser.py',162),
 ]

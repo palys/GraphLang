@@ -139,15 +139,39 @@ class TransformationNode(Node):
 class Primitive(Node):
     pass
 
-class Rectangle(Primitive):
-    def __init__(self, left, top, right, bottom):
+class Polygon(Primitive):
+    pass
+
+class Rectangle(Polygon):
+    def __init__(self, left, top, right, bottom, angle=0):
         self.top = top
         self.bottom = bottom
         self.left = left
         self.right = right
+        self.angle = angle
 
     def toScene(self):
-        return scene.Rectangle(self.left, self.right, self.bottom, self.top)
+        return scene.Rectangle(self.left, self.right, self.bottom, self.top, self.angle)
+
+class Circle(Primitive):
+    def __init__(self,x,y,radius):
+        self.x = x
+        self.y = y
+        self.radius = radius
+
+    def toScene(self):
+        return scene.Circle(self.x, self.y, self.radius)
+
+class Oval(Primitive):
+    def __init__(self,x,y,a,b,angle=0):
+        self.x = x
+        self.y = y
+        self.a = a
+        self.b = b
+        self.angle = angle
+
+    def toScene(self):
+        return scene.Oval(self.x, self.y, self.a, self.b, self.angle)
 
 class Rotation(TransformationNode):
     def __init__(self, angle):
@@ -163,6 +187,14 @@ class Translation(TransformationNode):
 
     def toScene(self):
         return scene.Translation(self.dx, self.dy)
+
+class Scale(TransformationNode):
+    def __init__(self, ratio, ratio2):
+        self.ratio = ratio
+        self.ratio2 = ratio2
+
+    def toScene(self):
+        return scene.Scale(self.ratio, self.ratio2)
 
 class Scene(object):
     def __init__(self, width, height, body):

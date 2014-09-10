@@ -28,9 +28,9 @@ class Scene(object):
 class Color(object):
 
     def __init__(self, red, green, blue):
-        self.red = red
-        self.green = green
-        self.blue = blue
+        self.red = red * 255
+        self.green = green * 255
+        self.blue = blue * 255
 
     def __str__(self):
         return "Color: {0} {1} {2}".format(self.red, self.green, self.blue)
@@ -38,16 +38,42 @@ class Color(object):
 class Primitive(object):
     pass
 
-class Rectangle(Primitive):
+class Polygon(Primitive):
+    pass
 
-    def __init__(self, left, right, bottom, top):
+class Rectangle(Polygon):
+
+    def __init__(self, left, right, bottom, top, angle):
         self.left = left
         self.right = right
         self.top = top
         self.bottom = bottom
+        self.angle = angle
 
     def __str__(self):
-        return "Rectangle: {0} {1} {2} {3}".format(self.left, self.top, self.right, self.bottom)
+        return "Rectangle: {0} {1} {2} {3} {4}".format(self.left, self.top, self.right, self.bottom, self.angle)
+
+class Circle(Primitive):
+
+    def __init__(self, x, y, radius):
+        self.x = x
+        self.y = y
+        self.radius = radius
+
+    def __str__(self):
+        return "Circle: {0} {1} {2}".format(self.x, self.y, self.radius)
+
+class Oval(Primitive):
+
+    def __init__(self, x, y, a, b, angle):
+        self.x = x
+        self.y = y
+        self.a = a
+        self.b = b
+        self.angle = angle
+
+    def __str__(self):
+        return "Oval: {0} {1} {2} {3} rotatedBy={4}".format(self.x, self.y, self.a, self.b, self.angle)
 
 class Transformation(object):
     pass
@@ -69,4 +95,11 @@ class Translation(Transformation):
     def __str__(self):
         return "Translation: {0} {1}".format(self.dx, self.dy)
 
+class Scale(Transformation):
 
+    def __init__(self,ratio,ratio2):
+        self.ratio = ratio
+        self.ratio2 = ratio2
+
+    def __str__(self):
+        return "Scale: {0} {1}".format(self.ratio, self.ratio2)
