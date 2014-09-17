@@ -79,7 +79,7 @@ class ColorDefinition(object):
         self.blue = blue
 
     def toScene(self):
-        return scene.Color(self.red, self.green, self.blue)
+        return scene.Color(self.red.getValue(), self.green.getValue(), self.blue.getValue())
 
     def __str__(self):
         return "color: {0} {1} {2}\n".format(self.red, self.green, self.blue)
@@ -154,17 +154,6 @@ class Primitive(Node):
 class Polygon(Primitive):
     pass
 
-class Rectangle(Polygon):
-    def __init__(self, left, top, right, bottom, angle=0):
-        self.top = top
-        self.bottom = bottom
-        self.left = left
-        self.right = right
-        self.angle = angle
-
-    def toScene(self):
-        return scene.Rectangle(self.left, self.right, self.bottom, self.top, self.angle)
-
 class Circle(Primitive):
     def __init__(self,x,y,radius):
         self.x = x
@@ -172,25 +161,14 @@ class Circle(Primitive):
         self.radius = radius
 
     def toScene(self):
-        return scene.Circle(self.x, self.y, self.radius)
-
-class Oval(Primitive):
-    def __init__(self,x,y,a,b,angle=0):
-        self.x = x
-        self.y = y
-        self.a = a
-        self.b = b
-        self.angle = angle
-
-    def toScene(self):
-        return scene.Oval(self.x, self.y, self.a, self.b, self.angle)
+        return scene.Circle(self.x.getValue(), self.y.getValue(), self.radius.getValue())
 
 class Rotation(TransformationNode):
     def __init__(self, angle):
         self.angle = angle
 
     def toScene(self):
-        return scene.Rotation(self.angle)
+        return scene.Rotation(self.angle.getValue())
 
 class Translation(TransformationNode):
     def __init__(self, dx, dy):
@@ -198,7 +176,7 @@ class Translation(TransformationNode):
         self.dy = dy
 
     def toScene(self):
-        return scene.Translation(self.dx, self.dy)
+        return scene.Translation(self.dx.getValue(), self.dy.getValue())
 
 class Scale(TransformationNode):
     def __init__(self, ratio, ratio2):
@@ -206,7 +184,7 @@ class Scale(TransformationNode):
         self.ratio2 = ratio2
 
     def toScene(self):
-        return scene.Scale(self.ratio, self.ratio2)
+        return scene.Scale(self.ratio.getValue(), self.ratio2.getValue())
 
 class Scene(object):
     def __init__(self, width, height, body, declarations):
@@ -550,7 +528,7 @@ class IfExpr(object):
         return iff
 
     def toScene(self):
-        if self.condition.getValue() == 1:
+        if self.condition.getValue() != 0:
             return self.trueBody.toScene()
         elif self.hasElse:
             return self.elseBody.toScene()
@@ -562,8 +540,10 @@ class WhileExpr(object):
 
     def toScene(self):
         result = []
-        while self.condition.getValue() == 1:
+        print "Value of expr is " + str(self.condition.getValue())
+        while self.condition.getValue() != 0:
             result.append(self.body.toScene())
+            print "Value of expr is " + str(self.condition.getValue())
         return result
 
 class Blocks(object):
@@ -577,12 +557,37 @@ class Blocks(object):
         s = []
         for c in self.children:
             ss = c.toScene()
-            if type(ss) is list:
-                s.extend(ss)
-            elif ss is not None:
-                s.append(ss)
+            self.addToList(s, ss)
         return s
 
+    def addToList(self, l, o):
+        if type(o) is list:
+            for e in o:
+                self.addToList(l, e)
+        elif o is not None:
+            l.append(o)
+
+class Rectangle(Polygon):
+    def __init__(self, left, top, right, bottom, angle=Expression.ofConst(0)):
+        self.top = top
+        self.bottom = bottom
+        self.left = left
+        self.right = right
+        self.angle = angle
+
+    def toScene(self):
+        return scene.Rectangle(self.left.getValue(), self.right.getValue(), self.bottom.getValue(), self.top.getValue(), self.angle.getValue())
+
+class Oval(Primitive):
+    def __init__(self,x,y,a,b,angle=Expression.ofConst(0)):
+        self.x = x
+        self.y = y
+        self.a = a
+        self.b = b
+        self.angle = angle
+
+    def toScene(self):
+        return scene.Oval(self.x.getValue(), self.y.getValue(), self.a.getValue(), self.b.getValue(), self.angle.getValue())
 
 
 

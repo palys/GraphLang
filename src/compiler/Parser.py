@@ -58,8 +58,8 @@ class Parser(object):
         p[0] = AST.ObjectBody(p[1], p[3])
 
     def p_default_color_definition(self, p):
-        """default_color_definition : DEFAULT_COLOR '(' FLOAT ',' FLOAT ',' FLOAT ')'"""
-        p[0] = AST.ColorDefinition(float(p[3]), float(p[5]), float(p[7]))
+        """default_color_definition : DEFAULT_COLOR '(' expression ',' expression ',' expression ')'"""
+        p[0] = AST.ColorDefinition(p[3], p[5], p[7])
 
 #     def p_object_body_rest(self, p):
 #         """object_body_rest : object_body_rest2
@@ -131,25 +131,25 @@ class Parser(object):
         p[0] = p[1]
 
     def p_rotate_node(self, p):
-        """rotate_node : ROTATE '(' FLOAT ')'"""
-        p[0] = AST.Rotation(float(p[3]))
+        """rotate_node : ROTATE '(' expression ')'"""
+        p[0] = AST.Rotation(p[3])
 
     def p_translation_node(self, p):
-        """translation_node : TRANSLATE '(' INTEGER ',' INTEGER ')'"""
-        p[0] = AST.Translation(int(p[3]), int(p[5]))
+        """translation_node : TRANSLATE '(' expression ',' expression ')'"""
+        p[0] = AST.Translation(p[3], p[5])
 
     def p_color_node(self, p):
-        """color_node : COLOR '(' FLOAT ',' FLOAT ',' FLOAT ')'"""
-        p[0] = AST.ColorDefinition(float(p[3]), float(p[5]), float(p[7]))
+        """color_node : COLOR '(' expression ',' expression ',' expression ')'"""
+        p[0] = AST.ColorDefinition(p[3], p[5], p[7])
 
     def p_scale_node(self, p):
-        """scale_node : SCALE '(' FLOAT ')'
-                      | SCALE '(' FLOAT ',' FLOAT ')'"""
+        """scale_node : SCALE '(' expression ')'
+                      | SCALE '(' expression ',' expression ')'"""
 
         if len(p) == 5:
-            p[0] = AST.Scale(float(p[3]), float(p[3]))
+            p[0] = AST.Scale(p[3], p[3])
         else:
-            p[0] = AST.Scale(float(p[3]), float(p[5]))
+            p[0] = AST.Scale(p[3], p[5])
 
     def p_shape(self, p):
         """shape : primitive
@@ -163,26 +163,26 @@ class Parser(object):
         p[0] = p[1]
 
     def p_rectangle(self, p):
-        """rectangle : RECTANGLE '(' INTEGER ',' INTEGER ',' INTEGER ',' INTEGER ')'
-                     | RECTANGLE '(' INTEGER ',' INTEGER ',' INTEGER ',' INTEGER ',' INTEGER ')'"""
+        """rectangle : RECTANGLE '(' expression ',' expression ',' expression ',' expression ')'
+                     | RECTANGLE '(' expression ',' expression ',' expression ',' expression ',' expression ')'"""
 
         if len(p) == 11:
-            p[0] = AST.Rectangle(int(p[3]), int(p[5]), int(p[7]), int(p[9]))
+            p[0] = AST.Rectangle(p[3], p[5], p[7], p[9])
         else:
-            p[0] = AST.Rectangle(int(p[3]), int(p[5]), int(p[7]), int(p[9]), int(p[11]))
+            p[0] = AST.Rectangle(p[3], p[5], p[7], p[9], p[11])
 
     def p_circle(self, p):
-        """circle : CIRCLE '(' INTEGER ',' INTEGER ',' INTEGER ')'"""
-        p[0] = AST.Circle(int(p[3]), int(p[5]), int(p[7]))
+        """circle : CIRCLE '(' expression ',' expression ',' expression ')'"""
+        p[0] = AST.Circle(p[3], p[5], p[7])
 
     def p_oval(self, p):
-        """oval : OVAL '(' INTEGER ',' INTEGER ',' INTEGER ',' INTEGER ')'
-                | OVAL '(' INTEGER ',' INTEGER ',' INTEGER ',' INTEGER ',' INTEGER ')'"""
+        """oval : OVAL '(' expression ',' expression ',' expression ',' expression ')'
+                | OVAL '(' expression ',' expression ',' expression ',' expression ',' expression ')'"""
 
         if len(p) == 11:
-            p[0] = AST.Oval(int(p[3]), int(p[5]), int(p[7]), int(p[9]))
+            p[0] = AST.Oval(p[3], p[5], p[7], p[9])
         else:
-            p[0] = AST.Oval(int(p[3]), int(p[5]), int(p[7]), int(p[9]), int(p[11]))
+            p[0] = AST.Oval(p[3], p[5], p[7], p[9], p[11])
 
     def p_usage(self, p):
         """usage : ID"""
