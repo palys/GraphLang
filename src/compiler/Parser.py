@@ -266,21 +266,17 @@ class Parser(object):
         p[0] = AST.Expression.ofID(p[1])
 
     def p_two_arg_expr(self, p):
-        """two_arg_expr : expression operator expression"""
+        """two_arg_expr : expression '+' expression
+                        | expression '-' expression
+                        | expression '*' expression
+                        | expression '/' expression
+                        | expression L expression
+                        | expression LE expression
+                        | expression G expression
+                        | expression GE expression
+                        | expression EQ expression
+                        | expression NE expression"""
         p[0] = AST.Expression.ofTwoArg(p[1], p[2], p[3])
-
-    def p_operator(self, p):
-        """operator : '+'
-                    | '-'
-                    | '*'
-                    | '/'
-                    | L
-                    | LE
-                    | G
-                    | GE
-                    | EQ
-                    | NE"""
-        p[0] = p[1]
 
     def p_expr_in_brackets(self, p):
         """expr_in_brackets : '(' expression ')'"""
