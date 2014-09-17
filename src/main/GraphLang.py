@@ -20,7 +20,6 @@ if __name__ == '__main__':
         print str(scene)
         painter = Painter(scene)
         painter.paintScene()
-#TODO
 
     except IOError:
         print("Cannot open {0} file".format(filename))

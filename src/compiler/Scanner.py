@@ -38,7 +38,18 @@ class Scanner(object):
      'or' : 'OR',
      'and' : 'AND',
      'xor' : 'XOR',
-     'default_color' : 'DEFAULT_COLOR'
+     'color' : 'COLOR',
+     'int' : 'INT_TYPE',
+     'float' : 'FLOAT_TYPE',
+     '<' : 'L',
+     '<=' : 'LE',
+     '==' : 'EQ',
+     '!=' : 'NE',
+     '>' : 'G',
+     '>=' : 'GE',
+     'if' : 'IF',
+     'else' : 'ELSE',
+     'while' : 'WHILE'
   }
 
 

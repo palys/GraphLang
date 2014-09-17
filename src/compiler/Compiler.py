@@ -24,6 +24,6 @@ class Compiler(object):
 # parser.parse(text, lexer=graphParser.scanner)
 
         ast = parser.parse(text, lexer=graphParser.scanner)
-
+        #print "===========>\n" + str(ast) + "\n===================>\n"
 
         return ast.toScene()

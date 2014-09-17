@@ -11,11 +11,17 @@ class Scene(object):
         self.height = height
         self.children = []
 
+
     def add(self, element):
-        self.children.append(element)
+        if element is list:
+            for e in element:
+                self.add(e)
+        else:
+            self.children.append(element)
 
     def extend(self, elements):
-        self.children.extend(elements)
+        for e in elements:
+            self.add(e)
 
     def __str__(self):
         s = "({0}, {1})\n".format(self.width, self.height)

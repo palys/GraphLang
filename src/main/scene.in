@@ -9,17 +9,32 @@ def dwa_prostakaty
     default_color(1.0, 1.0, 1.0);
     prostakat;
     rectangle(100, 50, 300, 300);
-    /*color(1.0, 0.5, 0.5);*/
+    color(1.0, 0.5, 0.5);
     rotate(90.0);
     prostakat;
 }
 
 scene(800, 600)
 {
+    int i = 2;
+    int j = i + 3;
     dwa_prostakaty;
     translate(200, 200);
     circle(100,100,30);
     oval(150,150,10,30);
+    color(1.0, 0.0, 0.8);
+    i = 3;
+    if (1)
+    {
+        circle(50, 50, 1000);
+        color(0.0,1.0,0.0);
+
+    }
+    else
+    {
+        rectangle(0,0,100,100);
+        color(0.0,1.0,0.0);
+    }
     rectangle(0,0,200,100,30);
     oval(250,250,70,80,50);
     scale(0.5,2.0);
