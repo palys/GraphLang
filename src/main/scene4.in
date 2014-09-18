@@ -1,0 +1,22 @@
+def line
+{
+    default_color(1,0,0);
+    int i = 300;
+    while(i + 1)
+    {
+        rectangle(i*4, 0, i*4 + 4, 4);
+        i = i - 1;
+    }
+}
+
+scene(1200, 800)
+{
+    background(0,0,1);
+    int i = 16;
+    while(i + 1)
+    {
+        line;
+        translate(0, 50);
+        i = i - 1;
+    }
+}

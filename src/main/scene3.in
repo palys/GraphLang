@@ -1,0 +1,14 @@
+scene(1200, 800)
+{
+    background(0, 1, 0.5);
+    int i = 30;
+    while(i)
+    {
+        color(i/30.0, i/30.0, i/30.0);
+        rectangle(0, 350, 100, 450);
+        translate(100, 0);
+        scale(0.85);
+        i = i - 1;
+    }
+
+}

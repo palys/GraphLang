@@ -1,6 +1,10 @@
 scene(1200, 800)
 {
-    background(1,0,0);
+    background(1,0.4,0.7);
     color(0,0,0);
     rectangle(100, 100, 300, 200, 30);
+    color(0,1,0);
+    circle(500,500, 200);
+    color(0,0,1);
+    oval(800, 600, 100, 50, 60);
 }
