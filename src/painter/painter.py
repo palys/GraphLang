@@ -18,9 +18,6 @@ class Painter():
     def paintScene(self):
         map(lambda x: x.addToCanvas(self), self.scene.children)
 
-        self.C.create_oval(40,40, 200,300)
-        self.C.create_polygon(self.oval_to_poly(40,40, 200,300, rotation=30))
-
         self.C.pack()
         self.top.mainloop()
 
