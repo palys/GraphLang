@@ -8,11 +8,15 @@ import src.scene.scene as scene
 
 objects = {}
 
-class Global(object):
+class Memory(object):
     def __init__(self):
         self.variables = {}
 
-currentBlock = Global()
+globalMemory = Memory()
+blocks = [globalMemory]
+
+def currentBlock():
+    return blocks[len(blocks) - 1];
 
 
 class Program(object):
@@ -59,11 +63,13 @@ class ObjectDefinition(object):
 
 
 class ObjectBody(object):
-    def __init__(self, default_color, rest):
+    def __init__(self, default_color, rest, declarations):
         self.default_color = default_color
         self.rest = rest
+        self.declarations = declarations
 
     def toScene(self):
+        self.declarations.toScene()
         s = [self.default_color.toScene()]
         s.extend(self.rest.toScene())
         return s
@@ -104,7 +110,7 @@ class ObjectBodyRest(object):
         for x in l:
             if type(x) is list:
                 s.extend(x)
-            else:
+            elif x is not None:
                 s.append(x)
 
         return s
@@ -139,7 +145,10 @@ class UsageNode(Node):
         self.ID = ID
 
     def toScene(self):
+        newMemoryBlock = Memory()
+        blocks.append(newMemoryBlock)
         s =  objects[self.ID].toScene()
+        blocks.pop()
         return s
 
     def __str__(self):
@@ -333,7 +342,7 @@ class Expression(object):
             elif type(self.constant) is float:
                 return Type.ofFloat()
         elif self.t == 1:
-            return currentBlock.variables[self.id].getType()
+            return currentBlock().variables[self.id].getType()
         elif self.t == 2:
             return self.op.getType(self.e1, self.e2)
 
@@ -341,7 +350,7 @@ class Expression(object):
         if self.t == 0:
             return self.constant
         elif self.t == 1:
-            return currentBlock.variables[self.id].getValue()
+            return currentBlock().variables[self.id].getValue()
         elif self.t == 2:
             return self.op.compute(self.e1, self.e2)
 
@@ -456,24 +465,24 @@ class Declarator(object): # TODO check
         raise ValueError("Variable has no expr set")
 
     def toScene(self):
-        t = currentBlock.variables[self.name].getType()
+        t = currentBlock().variables[self.name].getType()
         if not t.eq(self.value.getType()):
             raise "Incorrect assignment"
         else:
-            currentBlock.variables[self.name].setValue(self.value.getValue())
+            currentBlock().variables[self.name].setValue(self.value.getValue())
 
     def toScene2(self, declarationType):
 
-        if self.name in currentBlock.variables:
+        if self.name in currentBlock().variables:
             raise ValueError("{0} declared twice in one scope.")
         elif self.hasValueSet:
             if self.value.getType().eq(declarationType):
-                currentBlock.variables[self.name] = ValueHolder(declarationType)
-                currentBlock.variables[self.name].setValue(self.value.getValue())
+                currentBlock().variables[self.name] = ValueHolder(declarationType)
+                currentBlock().variables[self.name].setValue(self.value.getValue())
             else:
                 raise ValueError("Wrong type of {0}").format(self.name)
         else:
-            currentBlock.variables[self.name] = ValueHolder(declarationType)
+            currentBlock().variables[self.name] = ValueHolder(declarationType)
 
     def __str__(self):
         return "declarator ({0}, {1})".format(self.name, self.value)

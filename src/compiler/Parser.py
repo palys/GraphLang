@@ -54,8 +54,8 @@ class Parser(object):
         p[0] = AST.ObjectDefinition(p[2], p[4])
 
     def p_object_body(self, p):
-        """object_body : default_color_definition ';' new_body_rest"""
-        p[0] = AST.ObjectBody(p[1], p[3])
+        """object_body : default_color_definition ';' declarations new_body_rest"""
+        p[0] = AST.ObjectBody(p[1], p[4], p[3])
 
     def p_default_color_definition(self, p):
         """default_color_definition : DEFAULT_COLOR '(' expression ',' expression ',' expression ')'"""
