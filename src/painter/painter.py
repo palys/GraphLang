@@ -13,7 +13,7 @@ class Painter():
         self.scene = s
         self.color = Color(0,0,0)
         self.top = Tkinter.Tk()
-        self.C = Tkinter.Canvas(self.top, bg="blue", height=s.height, width=s.width)
+        self.C = Tkinter.Canvas(self.top, bg=self.rgb_to_string(self.scene.backgroundColor), height=s.height, width=s.width)
 
     def paintScene(self):
         map(lambda x: x.addToCanvas(self), self.scene.children)

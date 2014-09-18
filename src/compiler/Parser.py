@@ -199,8 +199,8 @@ class Parser(object):
         p[0] = AST.UsageNode(p[1])
 
     def p_scene(self, p):
-        """scene : SCENE '(' INTEGER ',' INTEGER ')' '{' declarations new_body_rest '}'"""
-        p[0] = AST.Scene(int(p[3]), int(p[5]), p[9], p[8])
+        """scene : SCENE '(' INTEGER ',' INTEGER ')' '{' BACKGROUND '(' expression ',' expression ',' expression ')' ';' declarations new_body_rest '}'"""
+        p[0] = AST.Scene(int(p[3]), int(p[5]), p[18], p[17], AST.ColorDefinition(p[10], p[12], p[14]))
 
     def p_declarations(self, p):
         """declarations : declaration ';' declarations

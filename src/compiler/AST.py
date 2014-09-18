@@ -196,15 +196,16 @@ class Scale(TransformationNode):
         return scene.Scale(self.ratio.getValue(), self.ratio2.getValue())
 
 class Scene(object):
-    def __init__(self, width, height, body, declarations):
+    def __init__(self, width, height, body, declarations, backgroundColor):
         self.width = width
         self.height = height
         self.body = body
         self.variables = {}
         self.declarations = declarations
+        self.backgroundColor = backgroundColor
 
     def toScene(self):
-        s = scene.Scene(self.width, self.height)
+        s = scene.Scene(self.width, self.height, self.backgroundColor.toScene())
         currentBlock = self
         self.declarations.toScene()
         s.extend(self.body.toScene())

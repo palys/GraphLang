@@ -6,10 +6,11 @@ Created on 3 Jun 2014
 
 class Scene(object):
 
-    def __init__(self, width, height):
+    def __init__(self, width, height, backgroundColor):
         self.width = width
         self.height = height
         self.children = []
+        self.backgroundColor = backgroundColor
 
 
     def add(self, element):

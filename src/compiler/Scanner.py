@@ -49,7 +49,8 @@ class Scanner(object):
      '>=' : 'GE',
      'if' : 'IF',
      'else' : 'ELSE',
-     'while' : 'WHILE'
+     'while' : 'WHILE',
+     'background' : 'BACKGROUND'
   }
 
 
