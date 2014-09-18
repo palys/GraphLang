@@ -54,7 +54,7 @@ class Parser(object):
         p[0] = AST.ObjectDefinition(p[2], p[4])
 
     def p_object_body(self, p):
-        """object_body : default_color_definition ';' object_body_rest"""
+        """object_body : default_color_definition ';' new_body_rest"""
         p[0] = AST.ObjectBody(p[1], p[3])
 
     def p_default_color_definition(self, p):
@@ -71,10 +71,20 @@ class Parser(object):
 #             p[0].append(p[2])
 #         #TODO add assignment
 
+    def p_new_body_rest(self, p):
+        """new_body_rest : blocks object_body_rest
+                         | blocks"""
+        p[0] = AST.ObjectBodyRest()
+        p[0].append(p[1])
+
+        if len(p) == 3:
+            p[0].extend(p[2].nodeList)
+
     def p_block(self, p):
         """block : assigment ';'
                  | if_expr
-                 | while_expr"""
+                 | while_expr
+                 | color_node ';'"""
         p[0] = p[1]
 
     def p_blocks(self, p):
@@ -189,7 +199,7 @@ class Parser(object):
         p[0] = AST.UsageNode(p[1])
 
     def p_scene(self, p):
-        """scene : SCENE '(' INTEGER ',' INTEGER ')' '{' declarations object_body_rest '}'"""
+        """scene : SCENE '(' INTEGER ',' INTEGER ')' '{' declarations new_body_rest '}'"""
         p[0] = AST.Scene(int(p[3]), int(p[5]), p[9], p[8])
 
     def p_declarations(self, p):
@@ -283,15 +293,15 @@ class Parser(object):
         p[0] = p[2]
 
     def p_if_expr(self, p):
-        """if_expr : IF '(' expression ')' '{' object_body_rest '}'
-                   | IF '(' expression ')' '{' object_body_rest '}' ELSE '{' object_body_rest '}'"""
+        """if_expr : IF '(' expression ')' '{' new_body_rest '}'
+                   | IF '(' expression ')' '{' new_body_rest '}' ELSE '{' new_body_rest '}'"""
         if len(p) == 8:
             p[0] = AST.IfExpr.ofOnlyTrue(p[3], p[6])
         else:
             p[0] = AST.IfExpr.ofTrueFalse(p[3], p[6], p[10])
 
     def p_while_expr(self, p):
-        """while_expr : WHILE '(' expression ')' '{' object_body_rest '}'"""
+        """while_expr : WHILE '(' expression ')' '{' new_body_rest '}'"""
         p[0] = AST.WhileExpr(p[3], p[6])
 
 

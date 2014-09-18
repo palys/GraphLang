@@ -435,11 +435,6 @@ class Operator():
 
 
     def getType(self, arg1, arg2):
-        print "About to get type " + str(self.op) + " " + str(arg1.getType()) + " " + str(arg2.getType())
-        print str(Operator.result[self.op])
-        print str(Operator.result[self.op][arg1.getType()])
-
-
         return Operator.result[self.op][arg1.getType()][arg2.getType()]
 
     def compute(self, arg1, arg2):
@@ -469,19 +464,15 @@ class Declarator(object): # TODO check
 
     def toScene2(self, declarationType):
 
-        print "try to add " + self.name
-
         if self.name in currentBlock.variables:
             raise ValueError("{0} declared twice in one scope.")
         elif self.hasValueSet:
             if self.value.getType().eq(declarationType):
-                print "Added to scope " + self.name
                 currentBlock.variables[self.name] = ValueHolder(declarationType)
                 currentBlock.variables[self.name].setValue(self.value.getValue())
             else:
                 raise ValueError("Wrong type of {0}").format(self.name)
         else:
-            print "Added to scope " + self.name
             currentBlock.variables[self.name] = ValueHolder(declarationType)
 
     def __str__(self):
@@ -540,10 +531,8 @@ class WhileExpr(object):
 
     def toScene(self):
         result = []
-        print "Value of expr is " + str(self.condition.getValue())
         while self.condition.getValue() != 0:
             result.append(self.body.toScene())
-            print "Value of expr is " + str(self.condition.getValue())
         return result
 
 class Blocks(object):
